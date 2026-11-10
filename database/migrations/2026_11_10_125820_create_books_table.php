@@ -17,7 +17,9 @@ return new class extends Migration
     $table->string('author');
     $table->year('year');
     $table->integer('stock')->default(0);
-    $table->foreignId('category_id')->constrained()->onDelete('cascade');
+   $table->foreignId('category_id')
+    ->constrained()
+    ->restrictOnDelete();
     $table->timestamps();
         });
     }
