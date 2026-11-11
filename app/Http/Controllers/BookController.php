@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Category;
 
 class BookController extends Controller
 {
@@ -22,7 +23,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name')->get();
+
+        return view('books.create', compact('categories'));
     }
 
     /**
@@ -30,7 +33,18 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title'       => 'required|string|max:255',
+            'author'      => 'required|string|max:255',
+            'year'        => 'required|integer|min:1901|max:' . date('Y'),
+            'stock'       => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        Book::create($validated);
+
+        return redirect()->route('books.index')
+            ->with('success', 'Buku berhasil ditambahkan.');
     }
 
     /**

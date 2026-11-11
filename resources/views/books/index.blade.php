@@ -7,7 +7,7 @@
 
     <h1>Daftar Buku</h1>
 
-    <a href="#">Tambah Buku</a>
+    <a href="{{ route('books.create') }}">Tambah Buku</a>
 
     <table border="1" cellpadding="8">
         <thead>
