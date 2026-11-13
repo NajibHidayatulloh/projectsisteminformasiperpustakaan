@@ -30,7 +30,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author }}</td>
-                    <td>{{ $book->category->name }}</td>
+                    <td>{{ $book->category->name ?? '-' }}</td>
                     <td>{{ $book->year }}</td>
                     <td>{{ $book->stock }}</td>
                     <td>
