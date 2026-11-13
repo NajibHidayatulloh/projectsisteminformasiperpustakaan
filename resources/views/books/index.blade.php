@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Daftar Buku</title>
-</head>
-<body>
+
+@extends('layouts.app')
+
+@section('title', 'Daftar Buku')
+
+@section('content')
 
     <h1>Daftar Buku</h1>
 
     <a href="{{ route('books.create') }}">Tambah Buku</a>
+
+    <br><br>
 
     <table border="1" cellpadding="8">
         <thead>
@@ -23,23 +25,28 @@
         </thead>
 
         <tbody>
-            @foreach ($books as $book)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $book->title }}</td>
-            <td>{{ $book->author }}</td>
-            <td>{{ $book->category_id }}</td>
-            <td>{{ $book->year }}</td>
-            <td>{{ $book->stock }}</td>
-            <td>
-                <a href="#">Detail</a>
-                <a href="#">Edit</a>
-                <a href="#">Hapus</a>
-            </td>
-        </tr>
-    @endforeach
+            @forelse ($books as $book)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $book->title }}</td>
+                    <td>{{ $book->author }}</td>
+                    <td>{{ $book->category->name }}</td>
+                    <td>{{ $book->year }}</td>
+                    <td>{{ $book->stock }}</td>
+                    <td>
+                        <a href="{{ route('books.show', $book->id) }}">Detail</a>
+
+                        <a href="{{ route('books.edit', $book->id) }}">Edit</a>
+
+                        <a href="#">Hapus</a>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7">Belum ada buku.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 
-</body>
-</html>
+@endsection

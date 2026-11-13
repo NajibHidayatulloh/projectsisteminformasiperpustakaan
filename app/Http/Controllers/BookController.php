@@ -74,7 +74,18 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+
+    $book->title = $request->title;
+    $book->author = $request->author;
+    $book->year = $request->year;
+    $book->stock = $request->stock;
+    $book->category_id = $request->category_id;
+
+    $book->save();
+
+    return redirect()->route('books.index')
+        ->with('success', 'Buku berhasil diperbarui.')  ;
     }
 
     /**

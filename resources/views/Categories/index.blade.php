@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Daftar Kategori</title>
-</head>
-<body>
+
+@extends('layouts.app')
+
+@section('title', 'Daftar Kategori')
+
+@section('content')
 
     <h1>Daftar Kategori</h1>
 
@@ -42,7 +42,7 @@
                             @method('DELETE')
 
                             <button type="submit"
-                                    onclick="return confirm('Yakin ingin menghapus kategori ini?')">
+                                onclick="return confirm('Yakin ingin menghapus kategori ini?')">
                                 Hapus
                             </button>
                         </form>
@@ -56,5 +56,4 @@
         </tbody>
     </table>
 
-</body>
-</html>
+@endsection

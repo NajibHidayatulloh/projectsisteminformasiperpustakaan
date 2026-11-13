@@ -33,8 +33,8 @@
             <label>Tahun Terbit</label>
             <input
                 type="number"
-                name="publication_year"
-                value="{{ $book->publication_year }}"
+                name="year"
+                value="{{ $book->year }}"
             >
         </div>
 
