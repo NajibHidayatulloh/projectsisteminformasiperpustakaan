@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', 'Daftar Anggota')
@@ -6,6 +5,14 @@
 @section('content')
 
     <h1>Daftar Anggota</h1>
+
+    @if (session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
+
+    <a href="{{ route('members.create') }}">Tambah Anggota</a>
+
+    <br><br>
 
     <table border="1" cellpadding="10" cellspacing="0" width="100%">
         <thead>
