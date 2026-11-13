@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,20 +25,24 @@
 
         <tbody>
             @foreach ($books as $book)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $book->title }}</td>
-            <td>{{ $book->author }}</td>
-            <td>{{ $book->category_id }}</td>
-            <td>{{ $book->year }}</td>
-            <td>{{ $book->stock }}</td>
-            <td>
-                <a href="#">Detail</a>
-                <a href="#">Edit</a>
-                <a href="#">Hapus</a>
-            </td>
-        </tr>
-    @endforeach
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $book->title }}</td>
+                    <td>{{ $book->author }}</td>
+                    <td>{{ $book->category->name ?? '-' }}</td>
+                    <td>{{ $book->year }}</td>
+                    <td>{{ $book->stock }}</td>
+                    <td>
+                        <a href="{{ route('books.show', $book->id) }}">
+                            Detail
+                        </a>
+
+                        <a href="{{ route('books.edit', $book->id) }}">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
