@@ -52,7 +52,9 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+         $book = Book::with('category')->findOrFail($id);
+
+    return view('books.show', compact('book'));
     }
 
     /**
@@ -60,7 +62,11 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $book = Book::with('category')->findOrFail($id);
+
+    $categories = Category::all();
+
+    return view('books.edit', compact('book', 'categories'));
     }
 
     /**
