@@ -18,6 +18,7 @@
     <table border="1" cellpadding="10"  width="100%">
         <thead>
             <tr>
+                <th>No</th>
                 <th>ID</th>
                 <th>Nama Kategori</th>
                 <th>Aksi</th>
@@ -27,6 +28,7 @@
         <tbody>
             @forelse($categories as $category)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>

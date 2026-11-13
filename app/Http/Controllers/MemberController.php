@@ -50,4 +50,34 @@ public function edit(string $id)
 
     return view('members.edit', compact('member'));
 }
+ public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required|max:20',
+            'address' => 'required'
+        ]);
+
+        $member = Member::findOrFail($id);
+
+        $member->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address
+        ]);
+
+        return redirect()->route('members.index')
+            ->with('success', 'Data anggota berhasil diperbarui.');
+    }
+
+    // Menghapus data anggota
+    public function destroy($id)
+    {
+        $member = Member::findOrFail($id);
+
+        $member->delete();
+
+        return redirect()->route('members.index')
+            ->with('success', 'Data anggota berhasil dihapus.');
+    }
 }
