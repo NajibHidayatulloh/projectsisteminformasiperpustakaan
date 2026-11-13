@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', 'Daftar Buku')
@@ -6,6 +5,10 @@
 @section('content')
 
     <h1>Daftar Buku</h1>
+
+    @if (session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
 
     <a href="{{ route('books.create') }}">Tambah Buku</a>
 
@@ -38,7 +41,11 @@
 
                         <a href="{{ route('books.edit', $book->id) }}">Edit</a>
 
-                        <a href="#">Hapus</a>
+                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Hapus</button>
+                        </form>
                     </td>
                 </tr>
             @empty

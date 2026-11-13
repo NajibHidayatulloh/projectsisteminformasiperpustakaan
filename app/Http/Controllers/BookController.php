@@ -15,7 +15,7 @@ class BookController extends Controller
     {
         $books = Book::all();
 
-    return view('books.index', compact('books'));
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -52,9 +52,9 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-         $book = Book::with('category')->findOrFail($id);
+        $book = Book::with('category')->findOrFail($id);
 
-    return view('books.show', compact('book'));
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -64,9 +64,9 @@ class BookController extends Controller
     {
         $book = Book::with('category')->findOrFail($id);
 
-    $categories = Category::all();
+        $categories = Category::all();
 
-    return view('books.edit', compact('book', 'categories'));
+        return view('books.edit', compact('book', 'categories'));
     }
 
     /**
@@ -76,16 +76,16 @@ class BookController extends Controller
     {
         $book = Book::findOrFail($id);
 
-    $book->title = $request->title;
-    $book->author = $request->author;
-    $book->year = $request->year;
-    $book->stock = $request->stock;
-    $book->category_id = $request->category_id;
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->year = $request->year;
+        $book->stock = $request->stock;
+        $book->category_id = $request->category_id;
 
-    $book->save();
+        $book->save();
 
-    return redirect()->route('books.index')
-        ->with('success', 'Buku berhasil diperbarui.')  ;
+        return redirect()->route('books.index')
+            ->with('success', 'Buku berhasil diperbarui.');
     }
 
     /**
@@ -93,6 +93,10 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        return redirect()->route('books.index')
+            ->with('success', 'Buku berhasil dihapus.');
     }
 }
