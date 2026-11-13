@@ -80,6 +80,7 @@
         <div>
             <a href="{{ route('books.index') }}">Buku</a>
             <a href="{{ route('categories.index') }}">Kategori</a>
+            <a href="{{ route('members.index') }}"> Daftar Anggota</a>
         </div>
     </nav>
 

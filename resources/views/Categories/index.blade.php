@@ -15,7 +15,7 @@
 
     <br><br>
 
-    <table border="1" cellpadding="10">
+    <table border="1" cellpadding="10"  width="100%">
         <thead>
             <tr>
                 <th>ID</th>

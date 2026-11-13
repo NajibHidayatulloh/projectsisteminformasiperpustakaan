@@ -14,7 +14,7 @@
 
     <br><br>
 
-    <table border="1" cellpadding="8">
+    <table border="1" cellpadding="8"  width="100%">
         <thead>
             <tr>
                 <th>No</th>
