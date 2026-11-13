@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title', 'Daftar Anggota')
@@ -21,6 +22,7 @@
                 <th>Nama</th>
                 <th>No. Telepon</th>
                 <th>Alamat</th>
+                <th>Aksi</th>
             </tr>
         </thead>
 
@@ -31,10 +33,21 @@
                     <td>{{ $member->name }}</td>
                     <td>{{ $member->phone }}</td>
                     <td>{{ $member->address }}</td>
+                    <td>
+                        <a href="{{ route('members.show', $member->id) }}">
+                            Detail
+                        </a>
+
+                        |
+
+                        <a href="{{ route('members.edit', $member->id) }}">
+                            Edit
+                        </a>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" align="center">
+                    <td colspan="5" align="center">
                         Belum ada data anggota.
                     </td>
                 </tr>

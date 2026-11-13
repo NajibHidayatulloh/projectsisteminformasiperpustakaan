@@ -13,9 +13,4 @@ Route::resource('categories', CategoryController::class);
 
 Route::resource('books', BookController::class);
 
-Route::get('/members', [MemberController::class, 'index'])
-    ->name('members.index');
-Route::get('/members/create', [MemberController::class, 'create'])
-    ->name('members.create');
-Route::post('/members', [MemberController::class, 'store'])
-    ->name('members.store');
+Route::resource('members', MemberController::class);
