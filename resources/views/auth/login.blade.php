@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Perpustakaan</title>
-</head>
-<body>
+
+@extends('layouts.auth')
+
+@section('title', 'Login Perpustakaan')
+
+@section('content')
 
     <h1>Login Sistem Perpustakaan</h1>
 
@@ -46,5 +44,4 @@
         <button type="submit">Login</button>
     </form>
 
-</body>
-</html>
+@endsection

@@ -20,7 +20,6 @@
             color: #333;
         }
 
-        /* Navbar */
         .navbar {
             background-color: #2563eb;
             padding: 18px 40px;
@@ -45,7 +44,6 @@
             color: #dbeafe;
         }
 
-        /* Konten utama */
         .main-content {
             width: 95%;
             max-width: 1200px;
@@ -62,7 +60,6 @@
             color: #1e293b;
         }
 
-        /* Footer */
         .footer {
             text-align: center;
             padding: 20px;
@@ -74,29 +71,43 @@
 
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar">
-       <h2>Sistem Perpustakaan</h2>
+        <h2>Sistem Perpustakaan</h2>
 
-    <div>
-        <a href="{{ route('books.index') }}">Buku</a>
-        <a href="{{ route('categories.index') }}">Kategori</a>
-        <a href="{{ route('members.index') }}">Daftar Anggota</a>
+        <div>
+            <a href="{{ route('books.index') }}">Buku</a>
+            <a href="{{ route('categories.index') }}">Kategori</a>
+            <a href="{{ route('members.index') }}">Daftar Anggota</a>
 
-        @auth
-            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                @csrf
-                <button type="submit" style="
-                    background: transparent;
-                    border: none;
-                    color: white;
-                    margin-left: 20px;
-                    font-weight: bold;
-                    cursor: pointer;
-                    font-size: 16px;
-                ">
-                    Logout
-                </button>
-            </form>
-        @endauth
-    </div>
-</nav>
+            @auth
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" style="
+                        background: transparent;
+                        border: none;
+                        color: white;
+                        margin-left: 20px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        font-size: 16px;
+                    ">
+                        Logout
+                    </button>
+                </form>
+            @endauth
+        </div>
+    </nav>
+
+    <!-- Konten halaman -->
+    <main class="main-content">
+        @yield('content')
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Sistem Perpustakaan</p>
+    </footer>
+
+</body>
+</html>

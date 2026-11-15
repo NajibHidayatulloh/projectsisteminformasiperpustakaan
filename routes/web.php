@@ -17,12 +17,11 @@ Route::middleware('guest')->group(function () {
         ->name('login.submit');
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth')
-    ->name('logout');
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->name('logout');
 
-Route::resource('categories', CategoryController::class);
-
-Route::resource('books', BookController::class);
-
-Route::resource('members', MemberController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('books', BookController::class);
+    Route::resource('members', MemberController::class);
+});
