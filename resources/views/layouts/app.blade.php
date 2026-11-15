@@ -75,22 +75,28 @@
 <body>
 
     <nav class="navbar">
-        <h2>Sistem Perpustakaan</h2>
+       <h2>Sistem Perpustakaan</h2>
 
-        <div>
-            <a href="{{ route('books.index') }}">Buku</a>
-            <a href="{{ route('categories.index') }}">Kategori</a>
-            <a href="{{ route('members.index') }}"> Daftar Anggota</a>
-        </div>
-    </nav>
+    <div>
+        <a href="{{ route('books.index') }}">Buku</a>
+        <a href="{{ route('categories.index') }}">Kategori</a>
+        <a href="{{ route('members.index') }}">Daftar Anggota</a>
 
-    <main class="main-content">
-        @yield('content')
-    </main>
-
-    <footer class="footer">
-        <p>&copy; {{ date('Y') }} Sistem Perpustakaan</p>
-    </footer>
-
-</body>
-</html>
+        @auth
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" style="
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    margin-left: 20px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    font-size: 16px;
+                ">
+                    Logout
+                </button>
+            </form>
+        @endauth
+    </div>
+</nav>
