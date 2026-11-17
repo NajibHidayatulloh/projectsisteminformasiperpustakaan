@@ -79,6 +79,9 @@
             <a href="{{ route('books.index') }}">Buku</a>
             <a href="{{ route('categories.index') }}">Kategori</a>
             <a href="{{ route('members.index') }}">Daftar Anggota</a>
+            @if(auth()->user()->role === 'admin')
+            <a href="{{ route('users.index') }}">Manajemen Pengguna</a>
+            @endif
 
             @auth
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
