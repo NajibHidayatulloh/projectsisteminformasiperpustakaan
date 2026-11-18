@@ -79,6 +79,7 @@
             <a href="{{ route('books.index') }}">Buku</a>
             <a href="{{ route('categories.index') }}">Kategori</a>
             <a href="{{ route('members.index') }}">Daftar Anggota</a>
+            <a href="{{ route('borrowings.index') }}">Peminjaman</a>
             @if(auth()->user()->role === 'admin')
             <a href="{{ route('users.index') }}">Manajemen Pengguna</a>
             @endif
