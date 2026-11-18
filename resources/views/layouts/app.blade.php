@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -76,12 +75,13 @@
         <h2>Sistem Perpustakaan</h2>
 
         <div>
+            <a href="{{ route('dashboard') }}">Dashboard</a>
             <a href="{{ route('books.index') }}">Buku</a>
             <a href="{{ route('categories.index') }}">Kategori</a>
             <a href="{{ route('members.index') }}">Daftar Anggota</a>
             <a href="{{ route('borrowings.index') }}">Peminjaman</a>
             @if(auth()->user()->role === 'admin')
-            <a href="{{ route('users.index') }}">Manajemen Pengguna</a>
+                <a href="{{ route('users.index') }}">Manajemen Pengguna</a>
             @endif
 
             @auth
