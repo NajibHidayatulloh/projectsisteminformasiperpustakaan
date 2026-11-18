@@ -26,7 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('books', BookController::class);
     Route::resource('members', MemberController::class);
-    route::resource('borrowings', BorrowingController::class);
+    Route::resource('borrowings', BorrowingController::class);
+    Route::patch(
+    '/borrowings/{id}/return',
+    [BorrowingController::class, 'returnBook']
+)->name('borrowings.return');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

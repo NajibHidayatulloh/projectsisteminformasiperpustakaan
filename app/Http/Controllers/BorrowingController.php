@@ -80,5 +80,60 @@ public function store(Request $request)
         ->route('borrowings.index')
         ->with('success', 'Transaksi peminjaman berhasil disimpan dan stok buku telah diperbarui.');
 }
+public function returnBook($id)
+{
+    DB::transaction(function () use ($id) {
+
+        // Mengunci transaksi peminjaman agar tidak diproses bersamaan.
+        $borrowing = Borrowing::whereKey($id)
+            ->lockForUpdate()
+            ->firstOrFail();
+
+        // Mencegah transaksi dikembalikan lebih dari satu kali.
+        if ($borrowing->status !== 'borrowed') {
+            throw ValidationException::withMessages([
+                'return' => 'Buku pada transaksi ini sudah dikembalikan.',
+            ]);
+        }
+
+        // Mengambil semua detail buku dalam transaksi.
+        $details = BorrowingDetail::where(
+            'borrowing_id',
+            $borrowing->id
+        )->get();
+
+        foreach ($details as $detail) {
+
+            // Mengunci data buku sebelum stok ditambahkan.
+            $book = Book::whereKey($detail->book_id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            // Mengembalikan stok sesuai jumlah yang dipinjam.
+            $book->increment('stock', $detail->quantity);
+        }
+
+        // Memperbarui status dan tanggal pengembalian.
+        $borrowing->update([
+            'status' => 'returned',
+            'return_date' => Carbon::today()->toDateString(),
+        ]);
+
+    }, 3);
+
+    return redirect()
+        ->route('borrowings.index')
+        ->with('success', 'Buku berhasil dikembalikan dan stok telah diperbarui.');
+}
+public function show(Borrowing $borrowing)
+{
+    $borrowing->load([
+        'user',
+        'member',
+        'details.book'
+    ]);
+
+    return view('borrowings.show', compact('borrowing'));
+}
 }
 

@@ -22,6 +22,7 @@
                 <th>Tanggal Pinjam</th>
                 <th>Jatuh Tempo</th>
                 <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
 
@@ -34,10 +35,27 @@
                     <td>{{ $borrowing->borrow_date }}</td>
                     <td>{{ $borrowing->due_date }}</td>
                     <td>{{ $borrowing->status }}</td>
+                    <td>
+                         <a href="{{ route('borrowings.show', $borrowing->id) }}"> Detail</a>
+    @if ($borrowing->status === 'borrowed')
+        <form
+            action="{{ route('borrowings.return', $borrowing->id) }}"
+            method="POST"
+            onsubmit="return confirm('Yakin ingin mengembalikan buku ini?')"
+        >
+            @csrf
+            @method('PATCH')
+
+            <button type="submit">Kembalikan</button>
+        </form>
+    @else
+        Sudah dikembalikan
+    @endif
+</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         Belum ada data peminjaman.
                     </td>
                 </tr>
